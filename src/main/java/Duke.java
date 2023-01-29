@@ -1,12 +1,12 @@
-import duke.Ui.Ui;
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
-import duke.command.*;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Main Duke class which keep track a list of tasks
-
  */
 class Duke {
 
@@ -53,6 +53,7 @@ class Duke {
     }
 
     public static void main(String[] args) {
+
         new Duke("./././text-ui-test/input.txt").run();
     }
 

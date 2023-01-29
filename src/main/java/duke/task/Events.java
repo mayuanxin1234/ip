@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+
 
 /**
  * A class of events that encapsulates the event object created by event command
@@ -36,7 +36,8 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) +
-                " to: " + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
+        return "[E]" + super.toString() + " (from: " + startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"))
+                + " to: "
+                + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 }
