@@ -1,17 +1,11 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 public class Parser {
     enum ActionP {
-        bye, list, unmark, mark, todo, deadline, event, delete, find;
+        bye, list, unmark, mark, todo, deadline, event, delete, find, tag;
 
     }
 
@@ -33,6 +27,9 @@ public class Parser {
             return new DeleteCommand(taskNumberDelete);
         } else if (command.equals((ActionP.find.name()))) {
             return new FindCommand(s);
+        } else if (command.equals((ActionP.tag.name()))) {
+            int taskNumber = Integer.parseInt(s[1]);
+            return new TagCommand(s, taskNumber);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

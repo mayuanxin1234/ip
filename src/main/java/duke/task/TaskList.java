@@ -187,4 +187,14 @@ public class TaskList {
         }
         return result;
     }
+
+    public String tag(String tagName, int taskNumber) {
+        Task taskName = listDataBase.get(taskNumber - 1);
+        taskName.tag(tagName);
+        String result = "OK, I've tagged task \n";
+        //System.out.println("OK, I've marked this task as not done yet");
+        result += taskName.toString();
+        return result;
+
+    }
 }

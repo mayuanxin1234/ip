@@ -71,6 +71,14 @@ public class Ui extends Application {
     private Button findSend;
     private Label findDescriptionLabel;
     private TextField findDescription;
+    private VBox tagContainer;
+    private Button tagButton;
+    private Button tagSend;
+    private Label tagTaskNumberLabel;
+    private TextField tagTaskNumber;
+    private Label tagDescriptionLabel;
+    private TextField tagDescription;
+
 
     public Ui() {
 
@@ -109,6 +117,8 @@ public class Ui extends Application {
 
         findButton = new Button("Find");
 
+        tagButton = new Button("Tag");
+
         todoSend = new Button("Add Task");
 
         deadlineSend = new Button("Add Task");
@@ -122,6 +132,8 @@ public class Ui extends Application {
         deleteSend = new Button("Delete Task");
 
         findSend = new Button("Find");
+
+        tagSend = new Button("Tag");
 
         todoContainer = new VBox();
 
@@ -137,10 +149,12 @@ public class Ui extends Application {
 
         findContainer = new VBox();
 
-        topTasks.getChildren().addAll(todoButton, deadlineButton, eventButton, listButton, markButton, unmarkButton, deleteButton, findButton);
+        tagContainer = new VBox();
+
+        topTasks.getChildren().addAll(todoButton, deadlineButton, eventButton, listButton, markButton, unmarkButton, deleteButton, findButton, tagButton);
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, topTasks, todoContainer, deadlineContainer, eventContainer, markContainer
-        , unmarkContainer, deleteContainer, findContainer);
+        , unmarkContainer, deleteContainer, findContainer, tagContainer);
 
         scene = new Scene(mainLayout);
         stage.setScene(scene);
@@ -151,11 +165,11 @@ public class Ui extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(810.0);
+        stage.setMinWidth(910.0);
 
-        mainLayout.setPrefSize(800.0, 800.0);
+        mainLayout.setPrefSize(900.0, 800.0);
 
-        scrollPane.setPrefSize(785, 225);
+        scrollPane.setPrefSize(885, 225);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -165,7 +179,7 @@ public class Ui extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(675.0);
+        userInput.setPrefWidth(775.0);
 
         sendButton.setPrefWidth(100.0);
 
@@ -185,6 +199,8 @@ public class Ui extends Application {
 
         findButton.setPrefWidth(100.0);
 
+        tagButton.setPrefWidth(100.0);
+
         todoSend.setPrefWidth(100.0);
 
         deadlineSend.setPrefWidth(100.0);
@@ -198,6 +214,8 @@ public class Ui extends Application {
         deleteSend.setPrefWidth(150.0);
 
         findSend.setPrefWidth(100.0);
+
+        tagSend.setPrefWidth(100.0);
 
 
         AnchorPane.setBottomAnchor(scrollPane, 55.0);
@@ -218,6 +236,7 @@ public class Ui extends Application {
         AnchorPane.setTopAnchor(unmarkContainer, 40.0);
         AnchorPane.setTopAnchor(deleteContainer, 40.0);
         AnchorPane.setTopAnchor(findContainer, 40.0);
+        AnchorPane.setTopAnchor(tagContainer, 40.0);
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -285,10 +304,16 @@ public class Ui extends Application {
         findSend.setOnMouseClicked((event) -> {
             handleFindInput();
         });
+        tagButton.setOnMouseClicked((event) -> {
+            handletag();
+        });
+
+        tagSend.setOnMouseClicked((event) -> {
+            handletagInput();
+        });
 
         taskDescription = new Label("Task Description:");
         todoInput = new TextField();
-
 
         deadlineDescriptionLabel = new Label("Task Description:");
         deadlineDescription = new TextField();
@@ -313,6 +338,11 @@ public class Ui extends Application {
 
         findDescriptionLabel = new Label("Keyword:");
         findDescription = new TextField();
+
+        tagDescriptionLabel = new Label("Tag:");
+        tagDescription = new TextField();
+        tagTaskNumberLabel = new Label("Which task to tag?");
+        tagTaskNumber = new TextField();
 
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -356,6 +386,7 @@ public class Ui extends Application {
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         todoContainer.getChildren().addAll(taskDescription, todoInput, todoSend);
     }
 
@@ -375,6 +406,7 @@ public class Ui extends Application {
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         deadlineContainer.getChildren().addAll(deadlineDescriptionLabel, deadlineDescription, deadlineDateLabel, deadlineDate, deadlineSend);
 
     }
@@ -395,6 +427,7 @@ public class Ui extends Application {
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         eventContainer.getChildren().addAll(eventDescriptionLabel, eventDescription, eventDateStartLabel, eventDateStart
                 , eventDateEndLabel, eventDateEnd, eventSend);
 
@@ -421,6 +454,7 @@ public class Ui extends Application {
         markContainer.getChildren().removeAll(markDescriptionLabel, markDescription, markSend);
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
         Label dukeText = new Label(getResponse("list"));
         dialogContainer.getChildren().addAll(
@@ -437,6 +471,7 @@ public class Ui extends Application {
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         markContainer.getChildren().addAll(markDescriptionLabel, markDescription, markSend);
 
     }
@@ -458,6 +493,7 @@ public class Ui extends Application {
         markContainer.getChildren().removeAll(markDescriptionLabel, markDescription, markSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         unmarkContainer.getChildren().addAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
 
     }
@@ -478,6 +514,7 @@ public class Ui extends Application {
         markContainer.getChildren().removeAll(markDescriptionLabel, markDescription, markSend);
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         deleteContainer.getChildren().addAll(deleteDescriptionLabel, deleteDescription, deleteSend);
 
     }
@@ -498,6 +535,7 @@ public class Ui extends Application {
         markContainer.getChildren().removeAll(markDescriptionLabel, markDescription, markSend);
         unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
         deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
+        tagContainer.getChildren().removeAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
         findContainer.getChildren().addAll(findDescriptionLabel, findDescription, findSend);
 
     }
@@ -508,6 +546,27 @@ public class Ui extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         findDescription.clear();
+
+    }
+    private void handletag() {
+        todoContainer.getChildren().removeAll(taskDescription, todoInput, todoSend);
+        eventContainer.getChildren().removeAll(eventDescriptionLabel, eventDescription, eventDateStartLabel, eventDateStart
+                , eventDateEndLabel, eventDateEnd, eventSend);
+        markContainer.getChildren().removeAll(markDescriptionLabel, markDescription, markSend);
+        unmarkContainer.getChildren().removeAll(unmarkDescriptionLabel, unmarkDescription, unmarkSend);
+        deleteContainer.getChildren().removeAll(deleteDescriptionLabel, deleteDescription, deleteSend);
+        findContainer.getChildren().removeAll(findDescriptionLabel, findDescription, findSend);
+        deadlineContainer.getChildren().removeAll(deadlineDescriptionLabel, deadlineDescription, deadlineDateLabel, deadlineDate, deadlineSend);
+        tagContainer.getChildren().addAll(tagTaskNumberLabel, tagTaskNumber, tagDescriptionLabel, tagDescription, tagSend);
+    }
+
+    private void handletagInput() {
+        Label dukeText = new Label(getResponse("tag " + tagTaskNumber.getText() + " "  + tagDescription.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        tagTaskNumber.clear();
+        tagDescription.clear();
 
     }
 

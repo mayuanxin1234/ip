@@ -19,7 +19,7 @@ public class Deadlines extends Task {
      * @param date        date and time the task is due
      */
     public Deadlines(String description, String date) throws DukeException {
-        super(description);
+        super(description, null);
         if (date.length() <= 0) {
             throw new DukeException("No Date!");
         }

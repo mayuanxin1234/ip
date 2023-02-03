@@ -6,14 +6,16 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
      * Creates a task object
      *
      * @param description the data to be stored
      */
-    public Task(String description) {
+    public Task(String description, String tag) {
         this.description = description;
+        this.tag = tag;
         this.isDone = false;
     }
 
@@ -40,6 +42,9 @@ public class Task {
 
         this.isDone = false;
     }
+    public void tag(String tagName) {
+        this.tag = tagName;
+    }
 
     public boolean find(String word) {
         if (word.equals(this.description)) {
@@ -55,7 +60,10 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        if (this.tag == null) {
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        }
+        return "[" + this.getStatusIcon() + "] " + "#" + this.tag + this.description;
     }
 
 

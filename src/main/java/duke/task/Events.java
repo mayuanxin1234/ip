@@ -22,7 +22,7 @@ public class Events extends Task {
      * @param endTime     the time the task ends
      */
     public Events(String description, String startTime, String endTime) throws DukeException {
-        super(description);
+        super(description, null);
         if (startTime.length() <= 0) {
             throw new DukeException("Check your Date!");
         }

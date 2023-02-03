@@ -11,7 +11,7 @@ public class ToDos extends Task {
      * @param description the task to be kept
      */
     public ToDos(String description) {
-        super(description);
+        super(description, null);
     }
 
     /**
